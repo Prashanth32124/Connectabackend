@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const { MongoClient, ObjectId } = require("mongodb");
+const { MongoClient } = require("mongodb");
 
 const app = express();
 
@@ -20,7 +20,7 @@ async function connectToDB() {
 }
 
 /* =========================
-   POST /api/form
+   POST /form
 ========================= */
 app.post("/form", async (req, res) => {
   try {
@@ -70,7 +70,7 @@ app.post("/form", async (req, res) => {
 });
 
 /* =========================
-   GET /api/form
+   GET /form
 ========================= */
 app.get("/form", async (req, res) => {
   try {
@@ -87,10 +87,16 @@ app.get("/form", async (req, res) => {
 });
 
 /* =========================
-   Health
+   Health Check
 ========================= */
 app.get("/health", (req, res) => {
   res.json({ success: true, message: "API running 🚀" });
 });
 
-module.exports = app;
+/* =========================
+   Start Server
+========================= */
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
