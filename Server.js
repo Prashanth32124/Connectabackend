@@ -28,9 +28,9 @@ app.post("/form", async (req, res) => {
     const db = client.db("Sample");
     const collection = db.collection("form");
 
-    const { fullName, age, email, phone, organization, address, role } = req.body;
+    const { fullName, age, email, phone, organization, address} = req.body;
 
-    if (!fullName || !age || !email || !phone || !address || !role) {
+    if (!fullName || !age || !email || !phone || !address) {
       return res.status(400).json({
         success: false,
         message: "All required fields must be filled",
@@ -52,7 +52,6 @@ app.post("/form", async (req, res) => {
       phone,
       organization: organization || "",
       address,
-      role,
       createdAt: new Date(),
     });
 
